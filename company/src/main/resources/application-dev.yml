@@ -5,7 +5,7 @@ spring:
     name: company
   datasource:
     druid:
-      url: jdbc:mysql://localhost:3306/zts_cloud?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false
+      url: jdbc:mysql://localhost:3306/zts_cloud?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
       username: root
       password: zts2017
 

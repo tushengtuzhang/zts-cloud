@@ -36,8 +36,8 @@ public class FastJsonConfiguration extends WebMvcConfigurationSupport {
         );
 
         //设置了这句话，会影响到如果为空的，不显示（部分影响到了上面的）
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
+        //fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
+        //fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
 
         //设置接受的media类型，如支持application/json;chartSet=utf-8
         List<MediaType> fastMediaTypes = new ArrayList<>();

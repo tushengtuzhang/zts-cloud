@@ -2,10 +2,7 @@ package com.zts.controller;
 
 import com.zts.entity.Company;
 import com.zts.service.CompanyService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,6 +20,12 @@ public class CompanyController {
     @GetMapping("/list")
     public List<Company> list(){
         return companyService.findAll();
+    }
+
+    @GetMapping("{companyId}")
+    public Company get(@PathVariable Long companyId){
+
+        return companyService.find(companyId);
     }
 
     @GetMapping("/hello")

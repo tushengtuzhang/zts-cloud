@@ -1,6 +1,8 @@
 package com.zts.controller;
 
 import com.zts.entity.AppCase;
+import com.zts.entity.Company;
+import com.zts.feign.CompanyFeign;
 import com.zts.service.AppCaseService;
 import com.zts.vo.R;
 import org.springframework.data.domain.PageRequest;
@@ -23,10 +25,13 @@ public class AppCaseController {
     @Resource
     private AppCaseService appCaseService;
 
+    @Resource
+    private CompanyFeign companyFeign;
+
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
     public R list(){
-        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> map=new HashMap<>(1);
 
         map.put("list", appCaseService.findAll());
 
@@ -46,10 +51,6 @@ public class AppCaseController {
 
     }
 
-
-
-
-
     @RequestMapping(value = "/save")
     @ResponseBody
     @Transactional
@@ -57,7 +58,7 @@ public class AppCaseController {
 
         appCase.setCreateTime(new Date());
 
-        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> map=new HashMap<>(1);
         appCaseService.save(appCase);
         map.put("entity",appCase);
         return R.ok(map);
@@ -65,12 +66,12 @@ public class AppCaseController {
 
     @RequestMapping(value = "update")
     @ResponseBody
-    @Transactional
+    @Transactional(rollbackOn = Exception.class)
     public R update(AppCase appCase){
 
         appCase.setUpdateTime(new Date());
 
-        Map<String,Object> map=new HashMap<>();
+        Map<String,Object> map=new HashMap<>(1);
         map.put("entity", appCaseService.update(appCase));
 
         return R.ok(map);
@@ -78,10 +79,16 @@ public class AppCaseController {
 
     @RequestMapping(value="delete")
     @ResponseBody
-    @Transactional
+    @Transactional(rollbackOn = Exception.class)
     @SuppressWarnings("unchecked")
     public R delete(Long id){
         appCaseService.delete(id);
         return R.error();
+    }
+    @GetMapping("/company/{companyId}")
+    @ResponseBody
+    public Company get(@PathVariable Long companyId){
+        Company company= companyFeign.get(companyId);
+        return company;
     }
 }

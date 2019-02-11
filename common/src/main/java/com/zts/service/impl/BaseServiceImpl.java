@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author zhangtusheng
@@ -24,7 +25,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity, ID extends Serializa
     @Override
     public T find(ID id) {
 
-        return getBaseDao().getOne(id);
+       return getBaseDao().findById(id).orElse(null);
     }
 
     @Override
