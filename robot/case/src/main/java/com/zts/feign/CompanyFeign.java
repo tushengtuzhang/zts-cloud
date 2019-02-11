@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author zhangtusheng
  */
-@FeignClient(value = "company")
+@FeignClient(value = "company",fallback = CompanyHystrix.class)
 public interface CompanyFeign {
 
     /**

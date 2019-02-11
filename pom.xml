@@ -13,6 +13,7 @@
         <module>company</module>
         <module>common</module>
         <module>robot</module>
+        <module>config</module>
     </modules>
 
     <properties>
