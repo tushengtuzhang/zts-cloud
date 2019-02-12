@@ -1,0 +1,93 @@
+server:
+  port: 8010
+spring:
+  application:
+    name: case
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/zts_cloud?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      username: root
+      password: zts2017
+
+      #配置druid额外的数据源
+      type: com.alibaba.druid.pool.DruidDataSource
+      # 连接池配置
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 连接等待超时时间
+      max-wait: 30000
+      # 配置检测可以关闭的空闲连接间隔时间
+      time-between-eviction-runs-millis: 60000
+      # 配置连接在池中的最小生存时间
+      min-evictable-idle-time-millis: 300000
+      validation-query: select '1' from dual
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      max-pool-prepared-statement-per-connection-size: 20
+      # 配置监控统计拦截的filters, 去掉后监控界面sql无法统计, 'wall'用于防火墙
+      filters: stat
+      # Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
+      #aop-patterns: com.zts.dao.*
+
+
+      # WebStatFilter配置
+      web-stat-filter:
+        enabled: true
+        # 添加过滤规则
+        url-pattern: /*
+        # 忽略过滤的格式
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+
+      # StatViewServlet配置
+      stat-view-servlet:
+        enabled: true
+        # 访问路径为/druid时，跳转到StatViewServlet
+        url-pattern: /druid/*
+        # 是否能够重置数据
+        reset-enable: false
+        # 需要账号密码才能访问控制台
+        login-username: druid
+        login-password: druid123
+        # IP白名单
+        # allow: 127.0.0.1
+        # IP黑名单（共同存在时，deny优先于allow）
+        # deny: 192.168.1.218
+
+      # 配置StatFilter
+      filter:
+        stat:
+          log-slow-sql: true
+
+    jpa:
+      hibernate:
+        ddl-auto: update  # 第一次简表create  后面用update 还是 validate 呢
+      properties:
+        hibernate:
+          show_sql: true
+          format_sql: true
+      open-in-view: true
+  devtools:
+    restart:
+      enabled: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+eureka:
+  client:
+    service-url:
+      #设置与Eureka Server交互的地址，查询服务和注册服务都需要依赖这个地址。默认是http://localhost:8761/eureka ；多个地址可使用 , 分隔。
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/,http://localhost:8763/eureka/
+#开启Hystrix
+feign:
+  hystrix:
+    enabled: true

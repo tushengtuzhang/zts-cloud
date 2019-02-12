@@ -1,0 +1,15 @@
+server:
+  port: 8000
+spring:
+  profiles:
+    active: dev
+  application:
+    name: company-server
+  cloud:
+    config:
+      fail-fast: true
+      discovery:
+        service-id: config-server
+        enabled: true
+      profile: ${spring.profiles.active}
+      label: master

@@ -1,0 +1,15 @@
+server:
+  port: 8010
+spring:
+  profiles:
+    active: dev
+  application:
+    name: case
+  cloud:
+    config:
+      fail-fast: true
+      discovery:
+        service-id: config
+        enabled: true
+      profile: ${spring.profiles.active}
+      label: master
