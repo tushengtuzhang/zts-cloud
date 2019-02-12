@@ -12,7 +12,7 @@
     <artifactId>case</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>case-core</module>
+        <module>case-server</module>
         <module>case-entity</module>
         <module>case-api</module>
     </modules>

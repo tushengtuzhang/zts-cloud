@@ -12,7 +12,7 @@
     <artifactId>company</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>company-core</module>
+        <module>company-server</module>
         <module>company-api</module>
         <module>company-entity</module>
     </modules>
