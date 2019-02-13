@@ -12,13 +12,13 @@ import javax.annotation.Resource;
  * @author zhangtusheng
  */
 @Service
-public class AppCaseService extends BaseServiceImpl<AppCase, Long> {
+public class AppCaseService extends BaseServiceImpl<AppCase, Integer> {
 
     @Resource
     private AppCaseDao appCaseDao;
 
     @Override
-    public IBaseDao<AppCase, Long> getBaseDao() {
+    public IBaseDao<AppCase, Integer> getBaseDao() {
         return appCaseDao;
     }
 

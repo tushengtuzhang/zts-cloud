@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
  * @author zhangtusheng
  */
 @Repository
-public interface CorpusDao extends IBaseDao<Corpus,Long> {
+public interface CorpusDao extends IBaseDao<Corpus,Integer> {
 
 }

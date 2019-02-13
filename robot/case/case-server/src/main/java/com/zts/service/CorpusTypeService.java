@@ -12,13 +12,13 @@ import javax.annotation.Resource;
  * @author zhangtusheng
  */
 @Service
-public class CorpusTypeService extends BaseServiceImpl<CorpusType,Long> {
+public class CorpusTypeService extends BaseServiceImpl<CorpusType,Integer> {
 
     @Resource
     private CorpusTypeDao corpusTypeDao;
 
     @Override
-    public IBaseDao<CorpusType, Long> getBaseDao() {
+    public IBaseDao<CorpusType, Integer> getBaseDao() {
         return corpusTypeDao;
     }
 }

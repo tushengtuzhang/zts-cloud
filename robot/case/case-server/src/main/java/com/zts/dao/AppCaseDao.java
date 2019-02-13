@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
  * @author zhangtusheng
  */
 @Repository
-public interface AppCaseDao extends IBaseDao<AppCase,Long> {
+public interface AppCaseDao extends IBaseDao<AppCase,Integer> {
 
 }

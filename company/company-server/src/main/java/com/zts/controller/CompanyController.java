@@ -1,11 +1,15 @@
 package com.zts.controller;
 
 import com.zts.entity.Company;
+import com.zts.entity.CompanyUser;
+import com.zts.entity.Status;
 import com.zts.service.CompanyService;
+import com.zts.util.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +25,9 @@ public class CompanyController {
     @Value("${name}")
     private String projectName;
 
+    @Resource
+    private RedisUtil<String, CompanyUser> companyUserRedisUtil;
+
     @GetMapping("/list")
     public List<Company> list(){
         return companyService.findAll();
@@ -28,6 +35,15 @@ public class CompanyController {
 
     @GetMapping("{companyId}")
     public Company get(@PathVariable Long companyId){
+        System.out.println("load1");
+
+        CompanyUser companyUser=new CompanyUser(1,"zts");
+
+        companyUserRedisUtil.save("zts",companyUser);
+
+        CompanyUser companyUser2 = companyUserRedisUtil.get("zts");
+        System.out.println(companyUser2);
+        companyUserRedisUtil.delete("zts");
 
         return companyService.find(companyId);
     }
