@@ -81,7 +81,7 @@ public class CaseController {
     @ResponseBody
     @Transactional(rollbackOn = Exception.class)
     @SuppressWarnings("unchecked")
-    public R delete(Long id){
+    public R delete(Integer id){
         appCaseService.delete(id);
         return R.error();
     }

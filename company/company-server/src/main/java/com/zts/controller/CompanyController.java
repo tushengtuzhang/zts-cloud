@@ -34,16 +34,8 @@ public class CompanyController {
     }
 
     @GetMapping("{companyId}")
-    public Company get(@PathVariable Long companyId){
+    public Company get(@PathVariable Integer companyId){
         System.out.println("load1");
-
-        CompanyUser companyUser=new CompanyUser(1,"zts");
-
-        companyUserRedisUtil.save("zts",companyUser);
-
-        CompanyUser companyUser2 = companyUserRedisUtil.get("zts");
-        System.out.println(companyUser2);
-        companyUserRedisUtil.delete("zts");
 
         return companyService.find(companyId);
     }
