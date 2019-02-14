@@ -20,6 +20,8 @@ import javax.persistence.*;
 @Table(name="app_case_question")
 public class AppCaseQuestion extends BaseEntity{
 
+    private String question;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "caseId", nullable = false)
     @JsonIgnore

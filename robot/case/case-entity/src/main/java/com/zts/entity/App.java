@@ -5,19 +5,23 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author zhangtusheng
  */
-@Entity
-@Table(name = "company_user")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class CompanyUser extends BaseEntity {
 
-    private String userName;
+@Entity
+@Table
+public class App extends BaseEntity{
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="companyId",nullable = false)
+    private Company company;
+
+
 }

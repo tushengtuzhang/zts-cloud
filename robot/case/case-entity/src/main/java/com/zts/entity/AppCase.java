@@ -19,9 +19,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "app_case")
+
 public class AppCase extends BaseEntity{
 
-    private String name;
+    private String content;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="companyId",nullable = false)

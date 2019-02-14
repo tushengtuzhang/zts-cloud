@@ -4,7 +4,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: case
+    name: case-server
   cloud:
     config:
       fail-fast: true
@@ -13,3 +13,15 @@ spring:
         enabled: true
       profile: ${spring.profiles.active}
       label: master
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    generate-ddl: true
+    open-in-view: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    show-sql: true

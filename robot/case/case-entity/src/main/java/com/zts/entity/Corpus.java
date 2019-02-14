@@ -24,5 +24,8 @@ public class Corpus extends BaseEntity{
     private CorpusType corpusType;
 
     private String name;
-    private String nature;
+    private String synonym;
+
+    private Integer seq;
+
 }

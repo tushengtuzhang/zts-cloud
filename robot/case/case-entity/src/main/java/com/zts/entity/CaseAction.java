@@ -20,7 +20,10 @@ import java.util.List;
 
 @Entity
 @Table(name="app_case_action")
-public class CaseAction extends BaseEntity{
+public class CaseAction {
+
+    @Id
+    private String id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "caseId", nullable = false)
@@ -34,4 +37,23 @@ public class CaseAction extends BaseEntity{
     @JoinColumn(name="companyId",nullable = false)
     @JsonIgnore
     private Company company;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "corpusTypeId")
+    private CorpusType corpusType;
+    private String corpusTypeName;
+
+    private String name;
+    private String value;
+
+    private Integer bounded;
+    private Integer required;
+    private Integer needMatch;
+    private Integer saveMatch;
+    private Integer general;
+
+    private Integer seq;
+
+
+
 }

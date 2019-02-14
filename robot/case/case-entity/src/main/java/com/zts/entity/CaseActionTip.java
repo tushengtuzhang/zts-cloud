@@ -21,6 +21,11 @@ import javax.persistence.*;
 public class CaseActionTip extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "caseId", nullable = false)
+    @JsonIgnore
+    private AppCase appCase;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "actionId", nullable = false)
     @JsonIgnore
     private CaseAction caseAction;
@@ -29,4 +34,8 @@ public class CaseActionTip extends BaseEntity{
     @JoinColumn(name="companyId",nullable = false)
     @JsonIgnore
     private Company company;
+
+    private String tips;
+
+    private Integer seq;
 }
