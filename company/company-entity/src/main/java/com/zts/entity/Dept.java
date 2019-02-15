@@ -13,6 +13,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @EntityListeners(AuditingEntityListener.class)
-public class Dept {
+public class Dept implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -42,13 +43,11 @@ public class Dept {
     @JoinColumn(name="companyId",nullable = false)
     private Company company;
 
-    /**父组织*/
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="pid")
     @JsonIgnore
     private Dept parent;
 
-    /**子组织*/
     @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
     @JoinColumn(name="pid")
     private List<Dept> children = new ArrayList<>();

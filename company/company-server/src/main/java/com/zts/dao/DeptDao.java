@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * @author zhangtusheng
  */
-public interface DeptDao extends JpaRepository<Dept, String> {
+public interface DeptDao extends DeptBaseDao<Dept,String> {
 
 }

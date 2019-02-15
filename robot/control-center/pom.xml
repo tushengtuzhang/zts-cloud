@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>qa</artifactId>
+    <artifactId>control-center</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>qa-entity</module>
-        <module>qa-api</module>
-        <module>qa-server</module>
+        <module>control-center-entity</module>
+        <module>control-center-api</module>
+        <module>control-center-server</module>
     </modules>
 
 

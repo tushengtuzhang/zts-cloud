@@ -15,7 +15,7 @@
         <module>case</module>
         <module>qa</module>
         <module>flow</module>
-        <module>control-center-server</module>
+        <module>control-center</module>
     </modules>
 
     <dependencies>

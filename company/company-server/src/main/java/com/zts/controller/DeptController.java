@@ -7,12 +7,10 @@ import com.zts.service.AdminUserService;
 import com.zts.service.CompanyService;
 import com.zts.service.DeptService;
 import com.zts.vo.ReturnVO;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author zhangtusheng
@@ -51,5 +49,21 @@ public class DeptController {
 
 
         return ReturnVO.OK(dept);
+    }
+
+    @RequestMapping(value="/listAll")
+    @ResponseBody
+    public List<Dept> listAll(){
+        Integer userId=1;
+
+
+        AdminUser adminUser=adminUserService.find(userId);
+
+        if(adminUser.getCompany().getId()==0){
+            return null;
+        }
+
+        return deptService.selectListByCompanyId(adminUser.getCompany().getId());
+
     }
 }
