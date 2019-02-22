@@ -1,19 +1,21 @@
 package com.zts.controller;
 
+import com.zts.criteria.Criteria;
+import com.zts.criteria.Restrictions;
 import com.zts.entity.AppCase;
 import com.zts.entity.Company;
 import com.zts.feign.CompanyFeign;
 import com.zts.service.AppCaseService;
-import com.zts.vo.R;
+import com.zts.vo.ReturnVO;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author zhangtusheng
@@ -28,67 +30,79 @@ public class CaseController {
     @Resource
     private CompanyFeign companyFeign;
 
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list")
     @ResponseBody
-    public R list(){
-        Map<String,Object> map=new HashMap<>(1);
-
-        map.put("list", appCaseService.findAll());
-
-        return R.ok(map);
+    public ReturnVO list(){
+        //companyId appId
+        Criteria<AppCase> criteria=new Criteria<>();
+        criteria.add(Restrictions.eq("company.id",1));
+        Sort sort=new Sort(Sort.Direction.DESC,"id");
+        appCaseService.findList(criteria,sort);
+        return ReturnVO.OK(appCaseService.findList(criteria,sort));
     }
+
+
 
     @RequestMapping(value = "/page")
     @ResponseBody
-    public R page(@RequestParam(defaultValue = "1") int pageNumber, @RequestParam(defaultValue = "15") int size, @RequestParam(defaultValue = "ASC") Sort.Direction direction, @RequestParam(defaultValue = "id") String orderBy){
+    public ReturnVO page(@RequestParam(defaultValue = "1") int pageNumber, @RequestParam(defaultValue = "15") int size, @RequestParam(defaultValue = "ASC") Sort.Direction direction, @RequestParam(defaultValue = "id") String orderBy){
 
         PageRequest pageRequest= PageRequest.of(pageNumber-1,size,new Sort(direction,orderBy));
 
-        Map<String,Object> map=new HashMap<>();
-        map.put("list", appCaseService.findAll(pageRequest));
-
-        return R.ok(map);
+        return ReturnVO.OK(appCaseService.findAll(pageRequest));
 
     }
 
     @RequestMapping(value = "/save")
     @ResponseBody
-    @Transactional
-    public R save(AppCase aAppCase){
+    @Transactional(rollbackOn = Exception.class)
+    public ReturnVO save(AppCase appCase){
 
-        aAppCase.setCreateTime(new Date());
+        appCase.setCreateTime(new Date());
 
-        Map<String,Object> map=new HashMap<>(1);
-        appCaseService.save(aAppCase);
-        map.put("entity", aAppCase);
-        return R.ok(map);
+        appCaseService.save(appCase);
+        return ReturnVO.OK(appCase);
     }
 
     @RequestMapping(value = "update")
     @ResponseBody
     @Transactional(rollbackOn = Exception.class)
-    public R update(AppCase aAppCase){
+    public ReturnVO update(AppCase appCase){
 
-        aAppCase.setUpdateTime(new Date());
+        appCase.setUpdateTime(new Date());
+        appCaseService.update(appCase);
 
-        Map<String,Object> map=new HashMap<>(1);
-        map.put("entity", appCaseService.update(aAppCase));
-
-        return R.ok(map);
+        return ReturnVO.OK(appCase);
     }
 
     @RequestMapping(value="delete")
     @ResponseBody
     @Transactional(rollbackOn = Exception.class)
-    @SuppressWarnings("unchecked")
-    public R delete(Integer id){
+    public ReturnVO delete(Integer id){
         appCaseService.delete(id);
-        return R.error();
+        return ReturnVO.OK("删除成功");
     }
+
+
     @GetMapping("/company/{companyId}")
     @ResponseBody
-    public Company get(@PathVariable Long companyId){
-        Company company= companyFeign.get(companyId);
-        return company;
+    public Company get(@PathVariable Integer companyId){
+        return companyFeign.get(companyId);
+    }
+
+
+    @RequestMapping(value = "/getListByCompanyId")
+    @ResponseBody
+    public List<AppCase> getListByCompanyId(Integer companyId){
+        Criteria<AppCase> criteria=new Criteria<>();
+        criteria.add(Restrictions.eq("company.id",companyId));
+        Sort sort=new Sort(Sort.Direction.DESC,"id");
+        return appCaseService.findList(criteria,sort);
+    }
+
+    @RequestMapping(value = "/get/{id}")
+    @ResponseBody
+    public AppCase find(@PathVariable  Integer id){
+        return appCaseService.find(id);
     }
 }

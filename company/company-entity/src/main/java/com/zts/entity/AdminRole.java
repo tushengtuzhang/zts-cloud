@@ -1,3 +1,4 @@
+
 package com.zts.entity;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class AdminRole extends BaseEntity{
     @JoinColumn(name="companyId",nullable = false)
     private Company company;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "admin_role_dept", joinColumns = {
             @JoinColumn(name = "roleId", nullable = false, updatable = false) }, inverseJoinColumns = {
             @JoinColumn(name = "deptId", nullable = false, updatable = false) })

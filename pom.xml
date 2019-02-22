@@ -14,6 +14,8 @@
         <module>common</module>
         <module>robot</module>
         <module>config-server</module>
+        <module>similarity</module>
+        <module>nlp</module>
     </modules>
 
     <properties>
@@ -183,10 +185,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
             </plugin>
-            <!--<plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>-->
         </plugins>
         <resources>
             <resource>

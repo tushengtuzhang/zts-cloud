@@ -35,4 +35,10 @@ public class QuestionAnswer extends BaseEntity{
     private QuestionAnswerType questionAnswerType;
 
 
+    @Transient
+    private Double score = 0.0d;
+    @Transient
+    private String bestMatchQuestion;
+
+
 }

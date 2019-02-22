@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 7000
 spring:
   profiles:
     active: dev
@@ -19,12 +19,12 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     generate-ddl: true
-    open-in-view: true
     properties:
       hibernate:
         show_sql: true
         format_sql: true
     show-sql: true
+    open-in-view: true
   jackson:
     default-property-inclusion: non_empty
 logging:

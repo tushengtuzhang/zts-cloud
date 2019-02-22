@@ -4,7 +4,6 @@ import com.zts.dao.CompanyDao;
 import com.zts.dao.IBaseDao;
 import com.zts.entity.Company;
 import com.zts.service.impl.BaseServiceImpl;
-import com.zts.util.redis.RedisUtil;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 

@@ -18,7 +18,12 @@ public class CompanyHystrix implements CompanyFeign{
     }
 
     @Override
-    public Company get(Long companyId) {
+    public Company get(Integer companyId) {
+        return null;
+    }
+
+    @Override
+    public String getUserNameByIdentification(String identification) {
         return null;
     }
 }

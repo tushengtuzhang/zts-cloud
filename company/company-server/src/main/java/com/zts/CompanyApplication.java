@@ -28,9 +28,9 @@ public class CompanyApplication {
      * 不写会抛出懒加载异常，不知道为什么
      * @return
      */
-    @Bean
+    /*@Bean
     public OpenEntityManagerInViewFilter openEntityManagerInViewFilter() {
         return new OpenEntityManagerInViewFilter();
-    }
+    }*/
 
 }

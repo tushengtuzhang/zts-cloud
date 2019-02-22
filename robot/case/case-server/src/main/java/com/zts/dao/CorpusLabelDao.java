@@ -1,12 +1,12 @@
 package com.zts.dao;
 
-import com.zts.entity.CorpusLabel;
+import com.zts.entity.CompCorpusLabel;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author zhangtusheng
  */
 @Repository
-public interface CorpusLabelDao extends IBaseDao<CorpusLabel,Integer> {
+public interface CorpusLabelDao extends IBaseDao<CompCorpusLabel,Integer> {
 
 }

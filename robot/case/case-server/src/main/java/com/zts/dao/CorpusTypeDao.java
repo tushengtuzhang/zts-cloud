@@ -1,12 +1,12 @@
 package com.zts.dao;
 
-import com.zts.entity.CorpusType;
+import com.zts.entity.CompCorpusType;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author zhangtusheng
  */
 @Repository
-public interface CorpusTypeDao extends IBaseDao<CorpusType,Integer> {
+public interface CorpusTypeDao extends IBaseDao<CompCorpusType,Integer> {
 
 }

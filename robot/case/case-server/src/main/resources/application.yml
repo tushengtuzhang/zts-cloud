@@ -9,7 +9,7 @@ spring:
     config:
       fail-fast: true
       discovery:
-        service-id: config
+        service-id: config-server
         enabled: true
       profile: ${spring.profiles.active}
       label: master

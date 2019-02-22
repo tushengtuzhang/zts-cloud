@@ -1,5 +1,6 @@
 package com.zts.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,19 +29,35 @@ public class AppCase extends BaseEntity{
     @JoinColumn(name="companyId",nullable = false)
     private Company company;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="appId",nullable = false)
+    @JsonIgnore
+    private App app;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appCase")
     private List<AppCaseQuestion> caseQuestionList=new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appCase")
-    List<CaseAction> caseActionList = new ArrayList<>();
+    List<AppCaseAction> appCaseActionList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appCase")
-    List<CaseReply> caseReplyList = new ArrayList<>();
+    List<AppCaseReply> appCaseReplyList = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "app_case_relation", catalog = "zts_cloud", joinColumns = {
+    @JoinTable(name = "app_case_relation", joinColumns = {
             @JoinColumn(name = "caseId", nullable = false, updatable = false) }, inverseJoinColumns = {
             @JoinColumn(name = "relationCaseId", nullable = false, updatable = false) })
     List<AppCase> appCaseRelationList;
+
+    private Integer companyServiceId;
+    private Integer originalServiceId;
+
+    private String replyType;
+    //来源
+    private String ref;
+    private Integer fileBaseId;
+
+    @Transient
+    private String firstQuestion="";
 
 }

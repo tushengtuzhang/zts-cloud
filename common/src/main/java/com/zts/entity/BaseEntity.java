@@ -35,9 +35,6 @@ public class BaseEntity implements Serializable{
 
     private Date deleteTime;
 
-    /*@Convert(converter = StatusConverter.class)
-    private Status status=Status.ACTIVE;*/
-
     @Transient
     @JsonIgnore
     private Date startTime;
