@@ -27,6 +27,6 @@ public interface FlowFeign {
     @RequestMapping("/flow/get/{id}")
     Flow get(@PathVariable(value = "id") Integer id);
 
-    @RequestMapping("/flowQuestion/{id}")
+    @RequestMapping("/flowQuestion/get/{id}")
     FlowQuestion getFlowQuestionById(@PathVariable(value = "id") Integer id);
 }
